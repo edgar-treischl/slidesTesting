@@ -1,0 +1,584 @@
+---
+title: "Testing"
+author: "Edgar K. Treischl"
+format: 
+  revealjs:
+    theme: [default, style.scss]
+    syntax-highlighting: kate
+    menu: true
+    slide-number: true
+    transition: slide
+execute:
+  echo: true
+---
+
+
+
+## Agenda
+
+  1. Intro Testthat
+  2. Testthat Functions
+  3. Types of Testing
+  4. Getting dirty
+
+
+---
+
+## 01 Testthat {.section-slide background-color="#E41A1C" title-position="center"}
+
+
+
+---
+
+## Testthat R Package
+
+*Write code → Define expectations → Run tests → Catch problems*
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+`testthat` is the standard way for writing tests. Define what the code is expected to do, testthat automatically checks whether those expectations are met.
+
+Instead of manually checking results every time code changes, we can write tests once and run them repeatedly.
+
+:::
+
+::: {.column width="40%"}
+<br/>
+![](https://testthat.r-lib.org/logo.png){.nostretch fig-align="center" width="250px"}
+
+:::
+
+::::
+
+
+
+
+
+
+---
+
+## Testthat in a Nutshell
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+*Arrange → Act → Assert*
+
+```{r}
+#| echo: true
+#| eval: false
+# Example Code
+test_that("what am I testing?", {
+  
+  # Arrange
+  input <- ...
+  
+  # Act
+  result <- my_function(input)
+  
+  # Assert
+  expect_equal(result, ...)
+  
+})
+```
+
+:::
+
+::: {.column width="40%"}
+<br/>
+
+![](https://testthat.r-lib.org/logo.png){.nostretch width="250px"}
+
+
+
+:::
+
+::::
+
+
+
+ `r emoji::emoji("hand")` Testthat has several `expect_*` functions to test expectations.
+
+
+
+
+
+
+---
+
+## `expect_equal`
+
+Checks if two values are equal `r emoji::emoji("equal")`
+
+
+::: {.panel-tabset}
+
+### R
+
+```{r}
+#| error: true
+library(testthat)
+test_that("expect_equal checks equality", {
+  result <- (function(x) x + x)(2)
+  expect_equal(result, 4)
+  expect_equal(
+    c("apple", "banana"),
+    c("apple", "kiwi")
+  )
+})
+```
+
+### Python
+
+
+```{python}
+#| echo: true
+#| error: true
+def test_expect_equal():
+    assert 2 + 2 == 4
+    assert ["apple", "banana"] == ["apple", "banana"]
+
+test_expect_equal()
+print("✓ All tests passed")
+```
+
+:::
+
+
+--- 
+
+
+## 02 Testthat functions {.section-slide background-color="#107895" title-position="center"}
+
+
+
+
+
+
+
+---
+
+## `expect_identical` 
+
+Checks if objects are exactly identical `r emoji::emoji("twin")`
+
+
+```{r}
+#| echo: true
+test_that("expect_identical checks exact identity", {
+  
+  expect_identical(
+    c(1, 2, 3),
+    c(1, 2, 3)
+  )
+  
+})
+```
+
+<br/>
+
+*Similar to expect_equal(), but stricter.*
+
+
+---
+
+## `expect_true` and `expect_false`
+
+Checks if an expression evaluates to `TRUE`
+
+
+```{r}
+#| echo: true
+test_that("expect_true checks for TRUE", {
+  
+  x <- 10
+  expect_true(x > 0)
+  
+})
+
+```
+
+
+Checks if an expression evaluates to `FALSE`
+
+```{r}
+#| echo: true
+test_that("expect_false checks for FALSE", {
+  
+  x <- 10
+  expect_false(x == 20)
+  
+})
+```
+
+
+---
+
+### `expect_null`
+
+Checks that the result is `NULL`
+
+```{r}
+#| echo: true
+#| error: true
+test_that("expect_null checks for NULL", {
+  
+  result <- 0
+  expect_null(result)
+  
+})
+```
+
+
+
+---
+
+### `expect_length`, `expect_type` & `expect_s3_class`
+
+Checks the length, type, class of an object  `r emoji::emoji("horse")`  
+
+```{r}
+#| echo: true
+#| error: true
+test_that("expect_length checks length", {
+  
+  legs <- c(1, 1, 1, 1)
+
+  expect_length(legs, 4)
+  expect_type(legs, "double")
+
+  myvar <- factor(c("A", "B", "A"))
+  expect_s3_class(myvar, "factor")
+  
+})
+
+```
+
+
+
+
+
+---
+
+### `expect_error`
+
+Checks if code produces an error `r emoji::emoji("x")`  
+
+```{r}
+#| echo: true
+#| error: true
+divide <- function(x, y) {
+  if (y == 0) {
+    stop("Cannot divide by zero")
+  }
+
+  x / y
+}
+
+
+test_that("expect_error checks errors", {
+  
+  expect_error(
+    divide(10, 0)
+  )
+  
+})
+
+
+```
+
+
+
+
+---
+
+### `expect_warning`
+
+Checks that code produces a warning. `r emoji::emoji("warning")`
+
+```{r}
+#| echo: true
+#| error: true
+square_me <- function(x) {
+  
+  if (x < 0) {
+    warning("Negative value")
+  }
+  
+  x^2
+}
+
+test_that("expect_warning checks warnings", {
+  
+  expect_warning(
+    square_me(-5)
+  )
+})
+```
+
+
+
+---
+
+## 03 Test Types {.section-slide background-color="#e64173" title-position="center"}
+
+
+
+
+--- 
+
+## Unit tests
+
+A unit test tests the smallest meaningful piece of code, usually a function, method, or class. They're the foundation of an automated test suite. Unit tests are usually:
+
+  - Fast
+  - Numerous
+  - Automated
+  - Isolated from databases, networks, external services, etc.
+
+
+
+:::{.callout-note}
+
+## Unit Testing
+- Test main logic
+- Test weird/boundary cases too
+- And potentially invalid input
+
+:::
+
+
+
+--- 
+
+## Unit tests
+
+Suppose you work on a function to like this:
+
+```{r}
+#| echo: true
+calculate_pass_rate <- function(passed, 
+                                total_students) {
+
+  result <- passed / total_students
+  result
+}
+```
+
+
+Add a simple unit test:
+
+```{r}
+#| error: true
+# Unit testing #######
+test_that("pass rate is calculated correctly", {
+  expect_equal(
+    calculate_pass_rate(80, 100), 0.8
+  )
+})
+
+```
+
+
+--- 
+
+
+## What if ...
+
+R returns silently `NaN` and not an error if user `0` as input
+
+```{r}
+#| echo: true
+#| error: true
+calculate_pass_rate(0, 0)
+```
+
+The `expect_error` function would have informed us about this bug:
+
+```{r}
+#| echo: true
+#| error: true
+test_that("pass rate handles no students", {
+  expect_error(
+    calculate_pass_rate(0, 0)
+  )
+})
+
+```
+
+
+
+
+--- 
+
+## Update the Example Function
+
+
+```{r}
+#| echo: true
+calculate_pass_rate <- function(passed, total_students) {
+  if (total_students <= 0) {
+    stop("total_students must be greater than zero")
+  }
+
+  result <- passed / total_students
+  result
+}
+```
+
+
+And test again: 
+
+```{r}
+#| echo: true
+test_that("pass rate handles no students", {
+
+  expect_error(
+    calculate_pass_rate(0, 0)
+  )
+
+})
+```
+
+
+
+---
+
+### Smoke Test
+Is this build stable enough for us to bother testing it further? Can we build it?
+
+#### Example Run Pipeline
+
+```{r}
+#| echo: true
+#| error: false
+run_pipeline <- function(variables) {
+  result <- tibble::tibble(success = TRUE, predictions = NA)
+  result
+}
+
+```
+
+Test it ...
+
+```{r}
+#| echo: true
+#Smoke Test
+test_that("pipeline can run successfully", {
+  
+  result <- run_pipeline()
+  expect_true(result$success)
+})
+
+```
+
+
+
+---
+
+### Regression testing
+
+Did something that used to work stop working because of a change Regression testing attempts to catch these unintended consequences due to code development.
+
+<br/>
+
+```{r}
+#| error: true
+test_that("pipeline does not introduce missing predictions", {
+  
+  result <- run_pipeline(test_data)
+  
+  expect_false(
+    any(is.na(result$predictions))
+  )
+})
+
+
+```
+
+
+
+---
+
+## Snap shots
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+library(ggplot2)
+
+
+make_plot <- function() {
+  ggplot(mtcars, aes(x = wt, 
+                    y = mpg)) +
+    geom_point()
+}
+
+```
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+make_plot()
+```
+
+:::
+
+::::
+
+
+
+
+### Snapshotting a `ggplot`
+
+The `vdiffr` packages saves a reference plot when the test runs for the first time and compares the result of plot function with the reference
+
+```{r}
+#| eval: false
+#| echo: true
+test_that("car plot looks correct", {
+  vdiffr::expect_doppelganger(
+    "car scatter plot",
+    make_plot()
+  )
+})
+```
+
+
+
+---
+
+## Snap shots
+
+
+Testthat throws an error and ask you to assess changes via `snapshot_review()`. This opens the viewer and shows the changes:
+
+![](images/snapshot_review.png){.nostretch fig-align="center" width="600px"}
+
+
+ `r emoji::emoji("hand")` Reject or Accept
+
+
+---
+
+## 04 Ado {.section-slide background-color="#107895" title-position="center"}
+
+
+---
+
+## Fin
+
+![](images/pablo.jpeg){.nostretch fig-align="center" width="600px"}
+
+
+
+
+
