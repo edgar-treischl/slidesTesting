@@ -1,6 +1,6 @@
 ---
 title: "Testing"
-subtitle: "Is fun, isn't it?"
+subtitle: "Should be fun, right?"
 author: "Edgar J. Treischl"
 date: "August 29, 2026"
 format: 
@@ -16,7 +16,7 @@ title-slide-attributes:
   data-background-image: "images/pablo.jpeg"
   data-background-size: cover
   data-background-position: center
-  data-background-opacity: "1"
+  data-background-opacity: "0.75"
 ---
 
 
@@ -27,7 +27,7 @@ title-slide-attributes:
 ## Agenda {.center .agenda}
 
 
-  1. Intro Testthat
+  1. Testing Intro
   2. Testthat Functions
   3. Types of Testing
   4. Getting dirty
@@ -38,13 +38,13 @@ title-slide-attributes:
 
 
 
-## 01 Testthat {.center background-color="#E41A1C"}
+## 01 Testing Intro {.center background-color="#E41A1C"}
 
 
 
 ---
 
-## Testthat R Package
+## Testthat
 
 *Write code → Define expectations → Run tests → Catch problems*
 
@@ -52,7 +52,7 @@ title-slide-attributes:
 
 ::: {.column width="50%"}
 
-[`testthat`](https://testthat.r-lib.org)  is the standard way for writing tests. Define what the code is expected to do, testthat automatically checks whether those expectations are met.
+[`testthat`](https://testthat.r-lib.org){target="_blank"} is the standard way for writing tests. Define what the code is expected to do, testthat automatically checks whether those expectations are met.
 
 Instead of manually checking results every time code changes, we can write tests once and run them repeatedly.
 
@@ -138,20 +138,16 @@ Checks if two values are equal `r emoji::emoji("equal")`
 #| error: true
 library(testthat)
 test_that("expect_equal checks equality", {
-  
   result <- (function(x) x + x)(2)
-  
   expect_equal(result, 4)
-  
   expect_equal(
     c("apple", "banana"),
     c("apple", "kiwi")
   )
-
 })
 ```
 
-### Python
+### Py
 
 
 ```{python}
@@ -160,9 +156,9 @@ test_that("expect_equal checks equality", {
 def test_expect_equal():
     assert 2 + 2 == 4
     assert ["apple", "banana"] == ["apple", "banana"]
+    print("✓ All tests passed")
 
 test_expect_equal()
-print("✓ All tests passed")
 ```
 
 :::
@@ -170,7 +166,7 @@ print("✓ All tests passed")
 
 ---
 
-## Pytest Python Package
+## Pytest
 
 Write code → *Define assertions* → Run tests → Catch problems
 
@@ -178,7 +174,7 @@ Write code → *Define assertions* → Run tests → Catch problems
 
 ::: {.column width="50%"}
 
-[`pytest`](https://docs.pytest.org/) is the most popular way to write tests in Python. Define what the code is expected to do using simple `assert` statements, and `pytest` automatically checks whether those expectations are met.
+[`pytest`](https://docs.pytest.org/){target="_blank"} is the most popular way to write tests in Python. Define what the code is expected to do using simple *assert* statements, and pytest automatically checks whether those expectations are met.
 
 
 :::
@@ -199,7 +195,7 @@ Write code → *Define assertions* → Run tests → Catch problems
 
 
 
-## 02 Testthat functions {.center background-color="#107895"}
+## 02 Testthat Functions {.center background-color="#107895"}
 
 
 
@@ -211,6 +207,9 @@ Write code → *Define assertions* → Run tests → Catch problems
 
 Checks if objects are exactly identical `r emoji::emoji("twin")`
 
+::: {.panel-tabset}
+
+### R
 
 ```{r}
 #| echo: true
@@ -224,6 +223,25 @@ test_that("expect_identical checks exact identity", {
 })
 ```
 
+### Py
+
+
+```{python}
+#| echo: true
+#| error: true
+def test_expect_identical():
+    assert [1, 2, 3] == [1, 2, 3]
+    print("✓ All tests passed")
+
+test_expect_identical()
+```
+
+:::
+
+
+
+
+
 <br/>
 
 *Similar to expect_equal(), but stricter.*
@@ -236,6 +254,10 @@ test_that("expect_identical checks exact identity", {
 Checks if an expression evaluates to `TRUE`
 
 
+::: {.panel-tabset}
+
+### R
+
 ```{r}
 #| echo: true
 test_that("expect_true checks for TRUE", {
@@ -244,14 +266,39 @@ test_that("expect_true checks for TRUE", {
   expect_true(x > 0)
   
 })
-
 ```
+
+### Py
+
+
+```{python}
+#| error: true
+def test_expect_true():
+    x = 10
+    assert x > 0
+    print("✓ All tests passed")
+
+test_expect_true()
+```
+
+:::
+
+
+
+---
+
+## `expect_true` and `expect_false`
 
 
 Checks if an expression evaluates to `FALSE`
 
+
+::: {.panel-tabset}
+
+### R
+
 ```{r}
-#| echo: true
+#| error: true
 test_that("expect_false checks for FALSE", {
   
   x <- 10
@@ -260,6 +307,23 @@ test_that("expect_false checks for FALSE", {
 })
 ```
 
+### Py
+
+
+```{python}
+def test_expect_false():
+    x = 10
+    assert not (x == 20)
+    print("✓ All tests passed")
+
+test_expect_false()
+```
+
+:::
+
+
+
+
 
 ---
 
@@ -267,8 +331,11 @@ test_that("expect_false checks for FALSE", {
 
 Checks that the result is `NULL`
 
+::: {.panel-tabset}
+
+### R
+
 ```{r}
-#| echo: true
 #| error: true
 test_that("expect_null checks for NULL", {
   
@@ -278,18 +345,39 @@ test_that("expect_null checks for NULL", {
 })
 ```
 
+### Py
+
+
+```{python}
+#| error: true
+def test_expect_null():
+    result = 0
+    assert result is None
+    print("✓ All tests passed")
+
+test_expect_null()
+```
+
+:::
+
+
+
+
 
 
 ---
 
 ### `expect_length`, `expect_type` & `expect_s3_class`
 
-Checks the length, type, class of an object  `r emoji::emoji("horse")`  
+Checks the length, type, class of an object  `r emoji::emoji("horse")` 
+
+::: {.panel-tabset}
+
+### R
 
 ```{r}
-#| echo: true
 #| error: true
-test_that("expect_length checks length", {
+test_that("expect_length checks length, ...", {
   
   legs <- c(1, 1, 1, 1)
 
@@ -303,6 +391,29 @@ test_that("expect_length checks length", {
 
 ```
 
+### Py
+
+
+```{python}
+#| error: true
+def test_length_checks_length():
+    legs = [1, 1, 1, 1]
+
+    assert len(legs) == 4
+    assert all(isinstance(x, float) for x in legs)
+
+    myvar = ["A", "B", "A"]
+    assert isinstance(myvar, list)
+    print("✓ All tests passed")
+
+test_length_checks_length()
+```
+
+:::
+
+
+
+
 
 
 
@@ -311,10 +422,13 @@ test_that("expect_length checks length", {
 
 ### `expect_error`
 
-Checks if code produces an error `r emoji::emoji("x")`  
+Checks if code produces an error `r emoji::emoji("x")`
+
+::: {.panel-tabset}
+
+### R
 
 ```{r}
-#| echo: true
 #| error: true
 divide <- function(x, y) {
   if (y == 0) {
@@ -324,17 +438,39 @@ divide <- function(x, y) {
   x / y
 }
 
-
 test_that("expect_error checks errors", {
   
   expect_error(
     divide(10, 0)
   )
-  
 })
-
-
 ```
+
+### Py
+
+
+```{python}
+#| error: true
+def divide(x, y):
+    if y == 0:
+        raise ValueError("Cannot divide by zero")
+    return x / y
+
+def test_expect_error():
+    try:
+        divide(10, 0)
+    except ValueError:
+        print("✓ expect_error: error detected")
+    else:
+        raise AssertionError("Expected ValueError, but no error was raised")
+
+test_expect_error()
+```
+
+:::
+
+
+
 
 
 
@@ -345,8 +481,11 @@ test_that("expect_error checks errors", {
 
 Checks that code produces a warning. `r emoji::emoji("warning")`
 
+::: {.panel-tabset}
+
+### R
+
 ```{r}
-#| echo: true
 #| error: true
 square_me <- function(x) {
   
@@ -365,12 +504,42 @@ test_that("expect_warning checks warnings", {
 })
 ```
 
+### Py
+
+
+```{python}
+#| error: true
+import warnings
+
+def square_me(x):
+    if x < 0:
+        warnings.warn("Negative value")
+    return x ** 2
+
+def test_expect_warning():
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        square_me(-5)
+    if caught:
+        print("✓ Warning detected")
+    else:
+        print("✗ No warning detected")
+
+test_expect_warning()
+```
+
+:::
+
+
+
+
 
 
 ---
 
 
 ## 03 Test Types {.center background-color="#e64173"}
+
 
 
 
@@ -527,9 +696,11 @@ test_that("pipeline can run successfully", {
 
 ### Regression testing
 
-Did something that used to work stop working because of a change Regression testing attempts to catch these unintended consequences due to code development.
+Did something that used to work stop working because of a change?
 
-<br/>
+Regression testing attempts to catch these unintended consequences due to code development.
+
+
 
 ```{r}
 #| error: true

@@ -314,8 +314,8 @@ $selection-bg: #26351c !default;
 .reveal #title-slide h1.title {
   color: #ffffff !important;
 
-  font-size: 4rem;
-  font-weight: 650;
+  font-size: 6rem;
+  font-weight: 750;
 
   letter-spacing: -0.045em;
   line-height: 1.05;
@@ -333,8 +333,8 @@ $selection-bg: #26351c !default;
 .reveal #title-slide .subtitle {
   color: rgba(255, 255, 255, 0.82) !important;
 
-  font-size: 2.3rem;
-  font-weight: 400;
+  font-size: 2.6rem;
+  font-weight: 500;
   line-height: 1.4;
 
   margin: 0 auto 1.5em auto !important;
@@ -395,5 +395,174 @@ $selection-bg: #26351c !default;
 
   .reveal .slides section.agenda ol {
     font-size: 1rem;
+  }
+}
+
+
+
+/* =========================================================
+   PANEL TABSETS
+   =========================================================
+
+   Quarto Reveal.js:
+
+   ::: {.panel-tabset}
+
+   ### Tab 1
+
+   Content
+
+   ### Tab 2
+
+   Content
+
+   :::
+
+   Minimal / subtle tab styling.
+   ========================================================= */
+
+.reveal .panel-tabset {
+  margin-top: 1.2rem;
+}
+
+
+/* ---------------------------------------------------------
+   TAB BAR
+   --------------------------------------------------------- */
+
+.reveal .panel-tabset .panel-tabset-tabby {
+  border-bottom: 1px solid rgba($jet, 0.12) !important;
+}
+
+
+/* ---------------------------------------------------------
+   TABS
+   --------------------------------------------------------- */
+
+.reveal .panel-tabset [role="tab"] {
+  position: relative;
+
+  padding: 0.35em 0.8em !important;
+
+  margin: 0 0.15em 0 0 !important;
+
+  border: none !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+
+  color: rgba($jet, 0.55) !important;
+
+  font-family: $font-family-sans-serif;
+  font-size: 0.65em !important;
+  font-weight: 400;
+
+  line-height: 1.2;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+
+/* ---------------------------------------------------------
+   HOVER
+   --------------------------------------------------------- */
+
+.reveal .panel-tabset [role="tab"]:hover {
+  color: $accent !important;
+
+  background: rgba($accent, 0.04) !important;
+}
+
+
+/* ---------------------------------------------------------
+   ACTIVE TAB
+   --------------------------------------------------------- */
+
+.reveal .panel-tabset [role="tab"][aria-selected="true"] {
+  color: $accent !important;
+
+  font-weight: 500;
+
+  background: transparent !important;
+}
+
+
+/* Thin accent indicator */
+
+.reveal .panel-tabset [role="tab"][aria-selected="true"]::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0.8em;
+  right: 0.8em;
+  bottom: -1px;
+
+  height: 2px;
+
+  background: $accent;
+
+  border-radius: 2px;
+}
+
+
+/* ---------------------------------------------------------
+   TAB CONTENT
+   --------------------------------------------------------- */
+
+.reveal .panel-tabset .tab-content {
+  padding-top: 1rem !important;
+
+  border: none !important;
+
+  background: transparent !important;
+}
+
+
+/* ---------------------------------------------------------
+   REMOVE DEFAULT TAB-PANE STYLING
+   --------------------------------------------------------- */
+
+.reveal .panel-tabset .tab-pane {
+  border: none !important;
+
+  background: transparent !important;
+}
+
+
+/* ---------------------------------------------------------
+   TAB CONTENT HEADINGS
+   --------------------------------------------------------- */
+
+/*
+   The headings inside a panel-tabset become tab labels,
+   so don't apply your large slide-title styling to them.
+*/
+
+.reveal .panel-tabset h1,
+.reveal .panel-tabset h2,
+.reveal .panel-tabset h3,
+.reveal .panel-tabset h4 {
+  margin-top: 0 !important;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 700px) {
+
+  .reveal .panel-tabset [role="tab"] {
+    padding: 0.3em 0.6em !important;
+
+    font-size: 0.6em !important;
+  }
+
+  .reveal .panel-tabset [role="tab"][aria-selected="true"]::after {
+    left: 0.6em;
+    right: 0.6em;
   }
 }
