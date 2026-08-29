@@ -62,6 +62,17 @@ $selection-bg: #26351c !default;
 
 
 /* =========================================================
+   SLIDE HEADINGS
+   ========================================================= */
+
+.reveal .slides section h2 {
+  font-size: 3.5rem !important;
+  line-height: 1.05 !important;
+  font-weight: 500 !important;
+}
+
+
+/* =========================================================
    LINKS
    ========================================================= */
 
@@ -87,37 +98,55 @@ $selection-bg: #26351c !default;
 
 
 /* =========================================================
-   CENTERED DIVIDER SLIDES
+   SECTION / DIVIDER SLIDES
    =========================================================
 
-   QMD:
+   QMD examples:
 
-   ## 01 Testthat {.center .divider background-color="#E41A1C"}
+   ## 01 Testthat {.center background-color="#E41A1C"}
 
-   ## 02 Testthat functions {.center .divider background-color="#107895"}
+   ## 02 Testthat functions {.center background-color="#107895"}
 
-   Reveal.js controls slide positioning.
-   These rules only style the content.
+   These are section-introduction slides.
    ========================================================= */
 
-.reveal .slides section.center.divider {
+.reveal .slides section.center {
   text-align: center !important;
 }
 
-.reveal .slides section.center.divider h2 {
+.reveal .slides section.center h2 {
   color: #ffffff !important;
 
-  font-size: 12em !important;
+  font-size: 6.5rem !important;
   font-weight: 700 !important;
 
-  letter-spacing: -1px;
-  line-height: 1.1;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
 
   text-align: center !important;
 
   text-shadow:
     0 2px 8px rgba($jet, 0.3);
 }
+
+
+/* Optional: support {.divider} as well */
+
+.reveal .slides section.center.divider h2 {
+  color: #ffffff !important;
+
+  font-size: 6.5rem !important;
+  font-weight: 700 !important;
+
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+
+  text-align: center !important;
+
+  text-shadow:
+    0 2px 8px rgba($jet, 0.3);
+}
+
 
 
 /* =========================================================
@@ -285,7 +314,7 @@ $selection-bg: #26351c !default;
 .reveal #title-slide h1.title {
   color: #ffffff !important;
 
-  font-size: 6rem;
+  font-size: 4rem;
   font-weight: 650;
 
   letter-spacing: -0.045em;
@@ -366,9 +395,5 @@ $selection-bg: #26351c !default;
 
   .reveal .slides section.agenda ol {
     font-size: 1rem;
-  }
-
-  .reveal .slides section h2 {
-    font-size: 4.5em !important;
   }
 }
