@@ -1,6 +1,8 @@
 ---
 title: "Testing"
-author: "Edgar K. Treischl"
+subtitle: "From simple rules to surprising behavior"
+author: "Edgar J. Treischl"
+date: "August 29, 2026"
 format: 
   revealjs:
     theme: [default, style.scss]
@@ -10,11 +12,18 @@ format:
     transition: slide
 execute:
   echo: true
+title-slide-attributes:
+  data-background-image: "images/pablo.jpeg"
+  data-background-size: cover
+  data-background-position: center
+  data-background-opacity: "1"
 ---
 
 
+---
 
-## Agenda
+## Agenda {.center .agenda}
+
 
   1. Intro Testthat
   2. Testthat Functions
@@ -22,9 +31,12 @@ execute:
   4. Getting dirty
 
 
+
 ---
 
-## 01 Testthat {.section-slide background-color="#E41A1C" title-position="center"}
+
+
+## 01 Testthat {.center background-color="#E41A1C"}
 
 
 
@@ -38,7 +50,7 @@ execute:
 
 ::: {.column width="50%"}
 
-`testthat` is the standard way for writing tests. Define what the code is expected to do, testthat automatically checks whether those expectations are met.
+[`testthat`](https://testthat.r-lib.org)  is the standard way for writing tests. Define what the code is expected to do, testthat automatically checks whether those expectations are met.
 
 Instead of manually checking results every time code changes, we can write tests once and run them repeatedly.
 
@@ -51,6 +63,8 @@ Instead of manually checking results every time code changes, we can write tests
 :::
 
 ::::
+
+
 
 
 
@@ -122,12 +136,16 @@ Checks if two values are equal `r emoji::emoji("equal")`
 #| error: true
 library(testthat)
 test_that("expect_equal checks equality", {
+  
   result <- (function(x) x + x)(2)
+  
   expect_equal(result, 4)
+  
   expect_equal(
     c("apple", "banana"),
     c("apple", "kiwi")
   )
+
 })
 ```
 
@@ -148,12 +166,38 @@ print("✓ All tests passed")
 :::
 
 
+---
+
+## Pytest Python Package
+
+Write code → *Define assertions* → Run tests → Catch problems
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+[`pytest`](https://docs.pytest.org/) is the most popular way to write tests in Python. Define what the code is expected to do using simple `assert` statements, and `pytest` automatically checks whether those expectations are met.
+
+
+:::
+
+::: {.column width="40%"}
+
+<br/>
+
+![](https://docs.pytest.org/en/stable/_static/pytest1.png){.nostretch fig-align="center" width="250px"}
+
+:::
+
+::::
+
+
+
 --- 
 
 
-## 02 Testthat functions {.section-slide background-color="#107895" title-position="center"}
 
-
+## 02 Testthat functions {.center background-color="#107895"}
 
 
 
@@ -323,8 +367,8 @@ test_that("expect_warning checks warnings", {
 
 ---
 
-## 03 Test Types {.section-slide background-color="#e64173" title-position="center"}
 
+## 03 Test Types {.center background-color="#e64173"}
 
 
 
@@ -569,12 +613,14 @@ Testthat throws an error and ask you to assess changes via `snapshot_review()`. 
 
 ---
 
+
+
 ## 04 Ado {.section-slide background-color="#107895" title-position="center"}
 
 
 ---
 
-## Fin
+## The End
 
 ![](images/pablo.jpeg){.nostretch fig-align="center" width="600px"}
 

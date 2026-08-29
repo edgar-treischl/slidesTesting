@@ -9,7 +9,8 @@
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting-0f91f55e768280f2875a475a35161471.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.37">
 
-  <meta name="author" content="Edgar K. Treischl">
+  <meta name="author" content="Edgar J. Treischl">
+  <meta name="dcterms.date" content="2026-08-29">
   <title>Testing</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -100,7 +101,7 @@
     code span.vs { color: #bf0303; } /* VerbatimString */
     code span.wa { color: #bf0303; } /* Warning */
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-f04c8854503932f42f86d427c1002aa4.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-5840711b0b69a2080fdb71924aca4435.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -197,19 +198,21 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
+<section id="title-slide" data-background-image="images/pablo.jpeg" data-background-opacity="1" data-background-position="center" data-background-size="cover" class="quarto-title-block center">
   <h1 class="title">Testing</h1>
+  <p class="subtitle">From simple rules to surprising behavior</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Edgar K. Treischl 
+Edgar J. Treischl 
 </div>
 </div>
 </div>
 
+  <p class="date">2026-08-29</p>
 </section>
-<section id="agenda" class="slide level2">
+<section id="agenda" class="slide level2 center agenda">
 <h2>Agenda</h2>
 <ol type="1">
 <li>Intro Testthat</li>
@@ -218,7 +221,7 @@ Edgar K. Treischl
 <li>Getting dirty</li>
 </ol>
 </section>
-<section id="testthat" class="slide level2 section-slide" data-background-color="#E41A1C" data-title-position="center">
+<section id="testthat" class="slide level2 center" data-background-color="#E41A1C">
 <h2>01 Testthat</h2>
 </section>
 <section id="testthat-r-package" class="slide level2">
@@ -226,7 +229,7 @@ Edgar K. Treischl
 <p><em>Write code → Define expectations → Run tests → Catch problems</em></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><code>testthat</code> is the standard way for writing tests. Define what the code is expected to do, testthat automatically checks whether those expectations are met.</p>
+<p><a href="https://testthat.r-lib.org"><code>testthat</code></a> is the standard way for writing tests. Define what the code is expected to do, testthat automatically checks whether those expectations are met.</p>
 <p>Instead of manually checking results every time code changes, we can write tests once and run them repeatedly.</p>
 </div><div class="column" style="width:40%;">
 <p><br> <img data-src="https://testthat.r-lib.org/logo.png" class="quarto-figure quarto-figure-center" width="250"></p>
@@ -268,13 +271,17 @@ Edgar K. Treischl
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">library</span>(testthat)</span>
 <span id="cb2-2"><a href=""></a><span class="fu">test_that</span>(<span class="st">"expect_equal checks equality"</span>, {</span>
-<span id="cb2-3"><a href=""></a>  result <span class="ot">&lt;-</span> (<span class="cf">function</span>(x) x <span class="sc">+</span> x)(<span class="dv">2</span>)</span>
-<span id="cb2-4"><a href=""></a>  <span class="fu">expect_equal</span>(result, <span class="dv">4</span>)</span>
-<span id="cb2-5"><a href=""></a>  <span class="fu">expect_equal</span>(</span>
-<span id="cb2-6"><a href=""></a>    <span class="fu">c</span>(<span class="st">"apple"</span>, <span class="st">"banana"</span>),</span>
-<span id="cb2-7"><a href=""></a>    <span class="fu">c</span>(<span class="st">"apple"</span>, <span class="st">"kiwi"</span>)</span>
-<span id="cb2-8"><a href=""></a>  )</span>
-<span id="cb2-9"><a href=""></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-3"><a href=""></a>  </span>
+<span id="cb2-4"><a href=""></a>  result <span class="ot">&lt;-</span> (<span class="cf">function</span>(x) x <span class="sc">+</span> x)(<span class="dv">2</span>)</span>
+<span id="cb2-5"><a href=""></a>  </span>
+<span id="cb2-6"><a href=""></a>  <span class="fu">expect_equal</span>(result, <span class="dv">4</span>)</span>
+<span id="cb2-7"><a href=""></a>  </span>
+<span id="cb2-8"><a href=""></a>  <span class="fu">expect_equal</span>(</span>
+<span id="cb2-9"><a href=""></a>    <span class="fu">c</span>(<span class="st">"apple"</span>, <span class="st">"banana"</span>),</span>
+<span id="cb2-10"><a href=""></a>    <span class="fu">c</span>(<span class="st">"apple"</span>, <span class="st">"kiwi"</span>)</span>
+<span id="cb2-11"><a href=""></a>  )</span>
+<span id="cb2-12"><a href=""></a></span>
+<span id="cb2-13"><a href=""></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>── Failure: expect_equal checks equality ───────────────────────────────────────
 Expected `c("apple", "banana")` to equal `c("apple", "kiwi")`.
@@ -305,12 +312,27 @@ y[2]: "kiwi"</code></pre>
 </div>
 </div>
 </section>
-<section id="testthat-functions" class="slide level2 section-slide" data-background-color="#107895" data-title-position="center">
+<section id="pytest-python-package" class="slide level2">
+<h2>Pytest Python Package</h2>
+<p>Write code → <em>Define assertions</em> → Run tests → Catch problems</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><a href="https://docs.pytest.org/"><code>pytest</code></a> is the most popular way to write tests in Python. Define what the code is expected to do using simple <code>assert</code> statements, and <code>pytest</code> automatically checks whether those expectations are met.</p>
+</div><div class="column" style="width:40%;">
+<p><br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://docs.pytest.org/en/stable/_static/pytest1.png" class="quarto-figure quarto-figure-center" width="250"></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="testthat-functions" class="slide level2 center" data-background-color="#107895">
 <h2>02 Testthat functions</h2>
 </section>
 <section id="expect_identical" class="slide level2">
 <h2><code>expect_identical</code></h2>
-<p>Checks if objects are exactly identical 👯‍♀️</p>
+<p>Checks if objects are exactly identical 👯</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">test_that</span>(<span class="st">"expect_identical checks exact identity"</span>, {</span>
 <span id="cb7-2"><a href=""></a>  </span>
@@ -321,7 +343,7 @@ y[2]: "kiwi"</code></pre>
 <span id="cb7-7"><a href=""></a>  </span>
 <span id="cb7-8"><a href=""></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed with 1 success 🥇.</code></pre>
+<pre><code>Test passed with 1 success 😀.</code></pre>
 </div>
 </div>
 <p><br></p>
@@ -338,7 +360,7 @@ y[2]: "kiwi"</code></pre>
 <span id="cb9-5"><a href=""></a>  </span>
 <span id="cb9-6"><a href=""></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed with 1 success 🎉.</code></pre>
+<pre><code>Test passed with 1 success 🎊.</code></pre>
 </div>
 </div>
 <p>Checks if an expression evaluates to <code>FALSE</code></p>
@@ -395,7 +417,7 @@ Differences:
 <span id="cb16-10"><a href=""></a>  </span>
 <span id="cb16-11"><a href=""></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed with 3 successes 🎊.</code></pre>
+<pre><code>Test passed with 3 successes 🥳.</code></pre>
 </div>
 </div>
 </section>
@@ -421,7 +443,7 @@ Differences:
 <span id="cb18-15"><a href=""></a>  </span>
 <span id="cb18-16"><a href=""></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed with 1 success 😸.</code></pre>
+<pre><code>Test passed with 1 success 🥇.</code></pre>
 </div>
 </div>
 </section>
@@ -446,11 +468,11 @@ Differences:
 <span id="cb20-14"><a href=""></a>  )</span>
 <span id="cb20-15"><a href=""></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed with 1 success 🎊.</code></pre>
+<pre><code>Test passed with 1 success 🎉.</code></pre>
 </div>
 </div>
 </section>
-<section id="test-types" class="slide level2 section-slide" data-background-color="#e64173" data-title-position="center">
+<section id="test-types" class="slide level2 center" data-background-color="#e64173">
 <h2>03 Test Types</h2>
 </section>
 <section id="unit-tests" class="slide level2">
@@ -500,7 +522,7 @@ Differences:
 <span id="cb23-5"><a href=""></a>  )</span>
 <span id="cb23-6"><a href=""></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed with 1 success 🥳.</code></pre>
+<pre><code>Test passed with 1 success 😸.</code></pre>
 </div>
 </div>
 </section>
@@ -552,7 +574,7 @@ Expected `calculate_pass_rate(0, 0)` to throw a error.</code></pre>
 <span id="cb31-6"><a href=""></a></span>
 <span id="cb31-7"><a href=""></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed with 1 success 🎊.</code></pre>
+<pre><code>Test passed with 1 success 🥇.</code></pre>
 </div>
 </div>
 </section>
@@ -576,7 +598,7 @@ Expected `calculate_pass_rate(0, 0)` to throw a error.</code></pre>
 <span id="cb34-5"><a href=""></a>  <span class="fu">expect_true</span>(result<span class="sc">$</span>success)</span>
 <span id="cb34-6"><a href=""></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed with 1 success 🌈.</code></pre>
+<pre><code>Test passed with 1 success 😀.</code></pre>
 </div>
 </div>
 </section>
@@ -656,8 +678,8 @@ Differences:
 <section id="ado" class="slide level2 section-slide" data-background-color="#107895" data-title-position="center">
 <h2>04 Ado</h2>
 </section>
-<section id="fin" class="slide level2">
-<h2>Fin</h2>
+<section id="the-end" class="slide level2">
+<h2>The End</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/pablo.jpeg" class="quarto-figure quarto-figure-center" width="600"></p>
