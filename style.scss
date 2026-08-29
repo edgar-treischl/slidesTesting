@@ -48,10 +48,6 @@ $selection-bg: #26351c !default;
   letter-spacing: 0.3px;
 }
 
-@mixin accent-marker {
-  color: $accent-light;
-}
-
 
 /*-- scss:rules --*/
 
@@ -91,32 +87,31 @@ $selection-bg: #26351c !default;
 
 
 /* =========================================================
-   SECTION SLIDES
+   CENTERED DIVIDER SLIDES
    =========================================================
 
-   IMPORTANT:
-   Do NOT style the section itself with:
-     display: flex
-     position
-     height
-     transform
-     margin
-     top / bottom
+   QMD:
 
-   Reveal.js controls the positioning of slides.
-   We only style the heading.
+   ## 01 Testthat {.center .divider background-color="#E41A1C"}
+
+   ## 02 Testthat functions {.center .divider background-color="#107895"}
+
+   Reveal.js controls slide positioning.
+   These rules only style the content.
    ========================================================= */
 
-/* =========================================================
-   CENTERED DIVIDER SLIDES
-   ========================================================= */
+.reveal .slides section.center.divider {
+  text-align: center !important;
+}
 
 .reveal .slides section.center.divider h2 {
   color: #ffffff !important;
 
-  font-size: 3.2em;
-  font-weight: 700;
+  font-size: 12em !important;
+  font-weight: 700 !important;
+
   letter-spacing: -1px;
+  line-height: 1.1;
 
   text-align: center !important;
 
@@ -125,32 +120,24 @@ $selection-bg: #26351c !default;
 }
 
 
-
 /* =========================================================
    AGENDA
-   =========================================================
-
-   QMD:
-
-   ## Agenda {.center .agenda}
-
-   The `.center` class is responsible for the
-   vertical centering of the slide.
    ========================================================= */
 
 .reveal .slides section.agenda {
   text-align: center !important;
 }
 
+.reveal .slides section.agenda h2,
+.reveal .slides section.agenda h2.title {
+  color: $jet !important;
 
-/* Agenda title */
+  -webkit-text-fill-color: $jet !important;
 
-.reveal .slides section.agenda h2 {
   text-align: center !important;
+
+  text-shadow: none !important;
 }
-
-
-/* Agenda list */
 
 .reveal .slides section.agenda ol {
   display: inline-block !important;
@@ -161,10 +148,8 @@ $selection-bg: #26351c !default;
   text-align: left !important;
 }
 
-
-/* Agenda items */
-
 .reveal .slides section.agenda li {
+  color: $jet !important;
   margin-bottom: 0.5em;
 }
 
@@ -172,11 +157,6 @@ $selection-bg: #26351c !default;
 /* =========================================================
    MULTI-COLUMN LAYOUTS
    ========================================================= */
-
-
-/* ---------------------------------------------------------
-   30 / 70
-   --------------------------------------------------------- */
 
 .reveal .columns3070 > div.column:first-child {
   width: 30%;
@@ -187,10 +167,6 @@ $selection-bg: #26351c !default;
 }
 
 
-/* ---------------------------------------------------------
-   70 / 30
-   --------------------------------------------------------- */
-
 .reveal .columns7030 > div.column:first-child {
   width: 70%;
 }
@@ -200,10 +176,6 @@ $selection-bg: #26351c !default;
 }
 
 
-/* ---------------------------------------------------------
-   40 / 60
-   --------------------------------------------------------- */
-
 .reveal .columns4060 > div.column:first-child {
   width: 40%;
 }
@@ -212,10 +184,6 @@ $selection-bg: #26351c !default;
   width: 60%;
 }
 
-
-/* ---------------------------------------------------------
-   60 / 40
-   --------------------------------------------------------- */
 
 .reveal .columns6040 > div.column:first-child {
   width: 60%;
@@ -248,7 +216,6 @@ $selection-bg: #26351c !default;
 .reveal .column .cell-output-display figure {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
-
   padding-top: 0 !important;
 }
 
@@ -282,13 +249,11 @@ $selection-bg: #26351c !default;
 .reveal #title-slide {
   text-align: center !important;
 
-  /* Glass */
   background: rgba(255, 255, 255, 0.12) !important;
 
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 32px;
 
-  /* Frosted glass */
   backdrop-filter:
     blur(30px)
     saturate(140%);
@@ -297,19 +262,15 @@ $selection-bg: #26351c !default;
     blur(30px)
     saturate(140%);
 
-  /* Depth */
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
 
-  /* Card dimensions */
   width: 68% !important;
   height: auto !important;
 
-  /* Internal spacing */
   padding: 4rem 5rem !important;
 
-  /* Center the card */
   margin: auto !important;
 
   position: relative;
@@ -389,10 +350,6 @@ $selection-bg: #26351c !default;
 
 @media (max-width: 700px) {
 
-  /* -------------------------------------------------------
-     Title slide
-     ------------------------------------------------------- */
-
   .reveal #title-slide {
     width: 82% !important;
     padding: 2.5rem 2rem !important;
@@ -407,27 +364,11 @@ $selection-bg: #26351c !default;
     font-size: 1rem;
   }
 
-
-  /* -------------------------------------------------------
-     Agenda
-     ------------------------------------------------------- */
-
   .reveal .slides section.agenda ol {
     font-size: 1rem;
   }
+
+  .reveal .slides section h2 {
+    font-size: 4.5em !important;
+  }
 }
-
-
-.reveal .slides section.center {
-  text-align: center !important;
-}
-
-.reveal .slides section.center h2 {
-  color: #ffffff !important;
-  font-size: 3.2em;
-  font-weight: 700;
-  letter-spacing: -1px;
-  text-align: center !important;
-  text-shadow: 0 2px 8px rgba($jet, 0.3);
-}
-

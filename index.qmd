@@ -1,6 +1,6 @@
 ---
 title: "Testing"
-subtitle: "From simple rules to surprising behavior"
+subtitle: "Is fun, isn't it?"
 author: "Edgar J. Treischl"
 date: "August 29, 2026"
 format: 
@@ -22,7 +22,9 @@ title-slide-attributes:
 
 ---
 
-## Agenda {.center}
+
+
+## Agenda {.center .agenda}
 
 
   1. Intro Testthat
@@ -615,7 +617,8 @@ Testthat throws an error and ask you to assess changes via `snapshot_review()`. 
 
 
 
-## 04 Ado {.section-slide background-color="#107895" title-position="center"}
+## 04 Ado {.center background-color="#107895"}
+
 
 
 ---
