@@ -107,17 +107,23 @@ $selection-bg: #26351c !default;
    We only style the heading.
    ========================================================= */
 
-.reveal .slides section.section-slide h1,
-.reveal .slides section.section-slide h2 {
+/* =========================================================
+   CENTERED DIVIDER SLIDES
+   ========================================================= */
+
+.reveal .slides section.center.divider h2 {
   color: #ffffff !important;
 
   font-size: 3.2em;
   font-weight: 700;
   letter-spacing: -1px;
 
+  text-align: center !important;
+
   text-shadow:
     0 2px 8px rgba($jet, 0.3);
 }
+
 
 
 /* =========================================================

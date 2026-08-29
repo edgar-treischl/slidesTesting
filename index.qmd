@@ -22,7 +22,7 @@ title-slide-attributes:
 
 ---
 
-## Agenda {.center .agenda}
+## Agenda {.center}
 
 
   1. Intro Testthat
