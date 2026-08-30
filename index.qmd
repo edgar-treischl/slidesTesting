@@ -121,6 +121,31 @@ test_that("what am I testing?", {
 
 
 
+---
+
+## Testthat in your workflow
+
+
+Testthat runs automatically in an `R CMD Check`, include it in your CI/CD pipeline, period!
+
+
+![](images/testRStudio.png){.nostretch width="650px"}
+
+
+Plus: `usethis` helps with the setup and to add new tests:
+
+```{r}
+#| echo: true
+#| eval: false
+# Set up the test infrastructure and build a test
+
+usethis::use_testthat()
+usethis::use_test("R-file")
+```
+
+
+
+
 
 
 ---
@@ -249,7 +274,7 @@ test_expect_identical()
 
 ---
 
-## `expect_true` and `expect_false`
+## `expect_true`
 
 Checks if an expression evaluates to `TRUE`
 
@@ -287,7 +312,7 @@ test_expect_true()
 
 ---
 
-## `expect_true` and `expect_false`
+## `expect_false`
 
 
 Checks if an expression evaluates to `FALSE`
@@ -569,7 +594,7 @@ A unit test tests the smallest meaningful piece of code, usually a function, m
 
 --- 
 
-## Unit tests
+## My First Unit Test
 
 Suppose you work on a function to like this:
 
@@ -662,10 +687,10 @@ test_that("pass rate handles no students", {
 
 ---
 
-### Smoke Test
+## Smoke Test
 Is this build stable enough for us to bother testing it further? Can we build it?
 
-#### Example Run Pipeline
+### Example Run Pipeline
 
 ```{r}
 #| echo: true
@@ -694,7 +719,7 @@ test_that("pipeline can run successfully", {
 
 ---
 
-### Regression testing
+## Regression testing
 
 Did something that used to work stop working because of a change?
 
@@ -789,6 +814,19 @@ Testthat throws an error and ask you to assess changes via `snapshot_review()`. 
 
 
 ## 04 Ado {.center background-color="#107895"}
+
+
+---
+
+## Test coverage (htmlcov/covr)
+
+"Track test coverage for your R package and view reports locally or (optionally) upload the results to codecov or coveralls. (Hester 2023)"
+
+<iframe
+  src="htmlcov/index.html"
+  style="width: 100%; height: 80vh; border: none;">
+</iframe>
+
 
 
 
